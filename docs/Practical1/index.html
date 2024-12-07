@@ -1,0 +1,1947 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>DSA 554 3.0 Spatio-temporal Data Analysis – Spatio-Temporal Data Analysis: Python</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Spatio-Temporal Data Analysis: Python</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#loading-packages" id="toc-loading-packages" class="nav-link active" data-scroll-target="#loading-packages">Loading packages</a></li>
+  <li><a href="#working-with-built-in-data-set" id="toc-working-with-built-in-data-set" class="nav-link" data-scroll-target="#working-with-built-in-data-set">Working with Built-in Data Set</a>
+  <ul class="collapse">
+  <li><a href="#economics-data-set" id="toc-economics-data-set" class="nav-link" data-scroll-target="#economics-data-set"><code>economics</code> data set</a></li>
+  </ul></li>
+  <li><a href="#time-series-data-wrangling-part-1-create-new-time-based-variables" id="toc-time-series-data-wrangling-part-1-create-new-time-based-variables" class="nav-link" data-scroll-target="#time-series-data-wrangling-part-1-create-new-time-based-variables">Time Series Data Wrangling Part 1: Create new time-based variables</a>
+  <ul class="collapse">
+  <li><a href="#task-1-create-year-and-month-columns" id="toc-task-1-create-year-and-month-columns" class="nav-link" data-scroll-target="#task-1-create-year-and-month-columns">Task 1: Create <code>year</code> and <code>month</code> columns</a></li>
+  </ul></li>
+  <li><a href="#time-series-visualization" id="toc-time-series-visualization" class="nav-link" data-scroll-target="#time-series-visualization">Time Series Visualization</a>
+  <ul class="collapse">
+  <li><a href="#time-series-plots" id="toc-time-series-plots" class="nav-link" data-scroll-target="#time-series-plots">Time Series Plots</a>
+  <ul class="collapse">
+  <li><a href="#plot-1-dot-chart" id="toc-plot-1-dot-chart" class="nav-link" data-scroll-target="#plot-1-dot-chart">Plot 1: Dot chart</a></li>
+  <li><a href="#plot-2-line-chart" id="toc-plot-2-line-chart" class="nav-link" data-scroll-target="#plot-2-line-chart">Plot 2: Line chart</a></li>
+  <li><a href="#plot-3-dot-and-line-chart" id="toc-plot-3-dot-and-line-chart" class="nav-link" data-scroll-target="#plot-3-dot-and-line-chart">Plot 3: Dot and Line Chart</a></li>
+  <li><a href="#change-point-size" id="toc-change-point-size" class="nav-link" data-scroll-target="#change-point-size">Change Point Size</a></li>
+  <li><a href="#change-point-colour" id="toc-change-point-colour" class="nav-link" data-scroll-target="#change-point-colour">Change Point Colour</a></li>
+  <li><a href="#question-1-which-is-the-best-plot1-plot-2-or-plot-3" id="toc-question-1-which-is-the-best-plot1-plot-2-or-plot-3" class="nav-link" data-scroll-target="#question-1-which-is-the-best-plot1-plot-2-or-plot-3">Question 1: Which is the best? Plot1, Plot 2, or Plot 3</a></li>
+  </ul></li>
+  <li><a href="#seasonal-plots" id="toc-seasonal-plots" class="nav-link" data-scroll-target="#seasonal-plots">Seasonal plots</a>
+  <ul class="collapse">
+  <li><a href="#seasonal-plot-with-lines" id="toc-seasonal-plot-with-lines" class="nav-link" data-scroll-target="#seasonal-plot-with-lines">Seasonal plot with lines</a></li>
+  <li><a href="#seasonal-plot-with-lines-1" id="toc-seasonal-plot-with-lines-1" class="nav-link" data-scroll-target="#seasonal-plot-with-lines-1">Seasonal plot with lines</a></li>
+  <li><a href="#question-2-what-potential-issues-or-areas-for-improvement-can-you-identify-in-the-plot" id="toc-question-2-what-potential-issues-or-areas-for-improvement-can-you-identify-in-the-plot" class="nav-link" data-scroll-target="#question-2-what-potential-issues-or-areas-for-improvement-can-you-identify-in-the-plot">Question 2: What potential issues or areas for improvement can you identify in the plot?</a></li>
+  <li><a href="#fix-x-axis" id="toc-fix-x-axis" class="nav-link" data-scroll-target="#fix-x-axis">Fix x-axis</a></li>
+  <li><a href="#add-titles" id="toc-add-titles" class="nav-link" data-scroll-target="#add-titles">Add titles</a></li>
+  <li><a href="#box-plots-monthly-variation" id="toc-box-plots-monthly-variation" class="nav-link" data-scroll-target="#box-plots-monthly-variation">Box-plots: monthly variation</a></li>
+  <li><a href="#box-plots-yearly-variation" id="toc-box-plots-yearly-variation" class="nav-link" data-scroll-target="#box-plots-yearly-variation">Box-plots: yearly variation</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1</a></li>
+  <li><a href="#time-series-data-wrangling-part-2-type-convertions" id="toc-time-series-data-wrangling-part-2-type-convertions" class="nav-link" data-scroll-target="#time-series-data-wrangling-part-2-type-convertions">Time Series Data Wrangling Part 2: Type Convertions</a>
+  <ul class="collapse">
+  <li><a href="#cross-sectional-dataset" id="toc-cross-sectional-dataset" class="nav-link" data-scroll-target="#cross-sectional-dataset">Cross Sectional Dataset</a></li>
+  <li><a href="#time-series-dataset" id="toc-time-series-dataset" class="nav-link" data-scroll-target="#time-series-dataset">Time Series Dataset</a></li>
+  <li><a href="#air-passenger-dataset" id="toc-air-passenger-dataset" class="nav-link" data-scroll-target="#air-passenger-dataset">Air Passenger Dataset</a>
+  <ul class="collapse">
+  <li><a href="#time-series-plot-for-air-passenger-dataset" id="toc-time-series-plot-for-air-passenger-dataset" class="nav-link" data-scroll-target="#time-series-plot-for-air-passenger-dataset">Time Series Plot for Air Passenger Dataset</a></li>
+  </ul></li>
+  <li><a href="#convert-to-time-column" id="toc-convert-to-time-column" class="nav-link" data-scroll-target="#convert-to-time-column">Convert to Time Column</a></li>
+  </ul></li>
+  <li><a href="#index---yearly" id="toc-index---yearly" class="nav-link" data-scroll-target="#index---yearly">Index - Yearly</a>
+  <ul class="collapse">
+  <li><a href="#method-1" id="toc-method-1" class="nav-link" data-scroll-target="#method-1">Method 1</a></li>
+  <li><a href="#method-2" id="toc-method-2" class="nav-link" data-scroll-target="#method-2">Method 2</a></li>
+  <li><a href="#method-3" id="toc-method-3" class="nav-link" data-scroll-target="#method-3">Method 3</a></li>
+  <li><a href="#method-4" id="toc-method-4" class="nav-link" data-scroll-target="#method-4">Method 4</a></li>
+  <li><a href="#method-5" id="toc-method-5" class="nav-link" data-scroll-target="#method-5">Method 5</a></li>
+  </ul></li>
+  <li><a href="#index---monthly" id="toc-index---monthly" class="nav-link" data-scroll-target="#index---monthly">Index - Monthly</a>
+  <ul class="collapse">
+  <li><a href="#method-1-1" id="toc-method-1-1" class="nav-link" data-scroll-target="#method-1-1">Method 1</a></li>
+  <li><a href="#method-2-1" id="toc-method-2-1" class="nav-link" data-scroll-target="#method-2-1">Method 2</a></li>
+  </ul></li>
+  <li><a href="#index---quarterly" id="toc-index---quarterly" class="nav-link" data-scroll-target="#index---quarterly">Index - Quarterly</a></li>
+  <li><a href="#index---daily" id="toc-index---daily" class="nav-link" data-scroll-target="#index---daily">Index - Daily</a></li>
+  <li><a href="#index---hourly" id="toc-index---hourly" class="nav-link" data-scroll-target="#index---hourly">Index - hourly</a>
+  <ul class="collapse">
+  <li><a href="#method-1-2" id="toc-method-1-2" class="nav-link" data-scroll-target="#method-1-2">Method 1</a></li>
+  <li><a href="#method-2-2" id="toc-method-2-2" class="nav-link" data-scroll-target="#method-2-2">Method 2</a></li>
+  </ul></li>
+  <li><a href="#acf-and-pacf-plots" id="toc-acf-and-pacf-plots" class="nav-link" data-scroll-target="#acf-and-pacf-plots">ACF and PACF plots</a>
+  <ul class="collapse">
+  <li><a href="#preparing-data" id="toc-preparing-data" class="nav-link" data-scroll-target="#preparing-data">Preparing data</a></li>
+  <li><a href="#acf-plot" id="toc-acf-plot" class="nav-link" data-scroll-target="#acf-plot">ACF plot</a>
+  <ul class="collapse">
+  <li><a href="#your-turn-obtain-acf-and-pacf-plot-for-economics-dataset" id="toc-your-turn-obtain-acf-and-pacf-plot-for-economics-dataset" class="nav-link" data-scroll-target="#your-turn-obtain-acf-and-pacf-plot-for-economics-dataset">Your turn: Obtain ACF and PACF plot for economics dataset</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#generate-time-dependent-variables" id="toc-generate-time-dependent-variables" class="nav-link" data-scroll-target="#generate-time-dependent-variables">Generate Time Dependent Variables</a>
+  <ul class="collapse">
+  <li><a href="#generate-a-sequence" id="toc-generate-a-sequence" class="nav-link" data-scroll-target="#generate-a-sequence">Generate a sequence</a></li>
+  <li><a href="#convert-datetime-into-string" id="toc-convert-datetime-into-string" class="nav-link" data-scroll-target="#convert-datetime-into-string">convert Datetime into string</a></li>
+  <li><a href="#extract-yyyy-mm-dd-date" id="toc-extract-yyyy-mm-dd-date" class="nav-link" data-scroll-target="#extract-yyyy-mm-dd-date">extract YYYY-MM-DD date</a></li>
+  <li><a href="#slicing-month-from-yyyy-mm-dd-format" id="toc-slicing-month-from-yyyy-mm-dd-format" class="nav-link" data-scroll-target="#slicing-month-from-yyyy-mm-dd-format">Slicing month from YYYY-MM-DD format</a></li>
+  <li><a href="#slicing-day-from-yyyy-mm-dd-format" id="toc-slicing-day-from-yyyy-mm-dd-format" class="nav-link" data-scroll-target="#slicing-day-from-yyyy-mm-dd-format">Slicing day from YYYY-MM-DD format</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">DSA 554 3.0 Spatio-temporal Data Analysis</h1>
+<p class="subtitle lead">Time Series Analysis Using Python</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="loading-packages" class="level1">
+<h1>Loading packages</h1>
+<div id="8ed5026c" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotnine <span class="im">as</span> p9 </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine.data <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="working-with-built-in-data-set" class="level1">
+<h1>Working with Built-in Data Set</h1>
+<section id="economics-data-set" class="level2">
+<h2 class="anchored" data-anchor-id="economics-data-set"><code>economics</code> data set</h2>
+<div id="c10e6c30" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>economics</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="49">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">date</th>
+<th data-quarto-table-cell-role="th">pce</th>
+<th data-quarto-table-cell-role="th">pop</th>
+<th data-quarto-table-cell-role="th">psavert</th>
+<th data-quarto-table-cell-role="th">uempmed</th>
+<th data-quarto-table-cell-role="th">unemploy</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">month</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1967-07-01</td>
+<td>507.4</td>
+<td>198712</td>
+<td>12.5</td>
+<td>4.5</td>
+<td>2944</td>
+<td>1967</td>
+<td>7</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>1967-08-01</td>
+<td>510.5</td>
+<td>198911</td>
+<td>12.5</td>
+<td>4.7</td>
+<td>2945</td>
+<td>1967</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>1967-09-01</td>
+<td>516.3</td>
+<td>199113</td>
+<td>11.7</td>
+<td>4.6</td>
+<td>2958</td>
+<td>1967</td>
+<td>9</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>1967-10-01</td>
+<td>512.9</td>
+<td>199311</td>
+<td>12.5</td>
+<td>4.9</td>
+<td>3143</td>
+<td>1967</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>1967-11-01</td>
+<td>518.1</td>
+<td>199498</td>
+<td>12.5</td>
+<td>4.7</td>
+<td>3066</td>
+<td>1967</td>
+<td>11</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">569</td>
+<td>2014-12-01</td>
+<td>12122.0</td>
+<td>320201</td>
+<td>5.0</td>
+<td>12.6</td>
+<td>8688</td>
+<td>2014</td>
+<td>12</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">570</td>
+<td>2015-01-01</td>
+<td>12080.8</td>
+<td>320367</td>
+<td>5.5</td>
+<td>13.4</td>
+<td>8979</td>
+<td>2015</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">571</td>
+<td>2015-02-01</td>
+<td>12095.9</td>
+<td>320534</td>
+<td>5.7</td>
+<td>13.1</td>
+<td>8705</td>
+<td>2015</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">572</td>
+<td>2015-03-01</td>
+<td>12161.5</td>
+<td>320707</td>
+<td>5.2</td>
+<td>12.2</td>
+<td>8575</td>
+<td>2015</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">573</td>
+<td>2015-04-01</td>
+<td>12158.9</td>
+<td>320887</td>
+<td>5.6</td>
+<td>11.7</td>
+<td>8549</td>
+<td>2015</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+
+<p>574 rows × 8 columns</p>
+</div>
+</div>
+</div>
+<div id="34ce2540" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>economics.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 574 entries, 0 to 573
+Data columns (total 8 columns):
+ #   Column    Non-Null Count  Dtype         
+---  ------    --------------  -----         
+ 0   date      574 non-null    datetime64[ns]
+ 1   pce       574 non-null    float64       
+ 2   pop       574 non-null    int64         
+ 3   psavert   574 non-null    float64       
+ 4   uempmed   574 non-null    float64       
+ 5   unemploy  574 non-null    int64         
+ 6   year      574 non-null    int32         
+ 7   month     574 non-null    int32         
+dtypes: datetime64[ns](1), float64(3), int32(2), int64(2)
+memory usage: 31.5 KB</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="time-series-data-wrangling-part-1-create-new-time-based-variables" class="level1">
+<h1>Time Series Data Wrangling Part 1: Create new time-based variables</h1>
+<section id="task-1-create-year-and-month-columns" class="level2">
+<h2 class="anchored" data-anchor-id="task-1-create-year-and-month-columns">Task 1: Create <code>year</code> and <code>month</code> columns</h2>
+<div id="caa0cff5" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>economics[<span class="st">'year'</span>] <span class="op">=</span> economics[<span class="st">'date'</span>].dt.year</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>economics[<span class="st">'month'</span>] <span class="op">=</span> economics[<span class="st">'date'</span>].dt.month</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>economics</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="51">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">date</th>
+<th data-quarto-table-cell-role="th">pce</th>
+<th data-quarto-table-cell-role="th">pop</th>
+<th data-quarto-table-cell-role="th">psavert</th>
+<th data-quarto-table-cell-role="th">uempmed</th>
+<th data-quarto-table-cell-role="th">unemploy</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">month</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1967-07-01</td>
+<td>507.4</td>
+<td>198712</td>
+<td>12.5</td>
+<td>4.5</td>
+<td>2944</td>
+<td>1967</td>
+<td>7</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>1967-08-01</td>
+<td>510.5</td>
+<td>198911</td>
+<td>12.5</td>
+<td>4.7</td>
+<td>2945</td>
+<td>1967</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>1967-09-01</td>
+<td>516.3</td>
+<td>199113</td>
+<td>11.7</td>
+<td>4.6</td>
+<td>2958</td>
+<td>1967</td>
+<td>9</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>1967-10-01</td>
+<td>512.9</td>
+<td>199311</td>
+<td>12.5</td>
+<td>4.9</td>
+<td>3143</td>
+<td>1967</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>1967-11-01</td>
+<td>518.1</td>
+<td>199498</td>
+<td>12.5</td>
+<td>4.7</td>
+<td>3066</td>
+<td>1967</td>
+<td>11</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">569</td>
+<td>2014-12-01</td>
+<td>12122.0</td>
+<td>320201</td>
+<td>5.0</td>
+<td>12.6</td>
+<td>8688</td>
+<td>2014</td>
+<td>12</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">570</td>
+<td>2015-01-01</td>
+<td>12080.8</td>
+<td>320367</td>
+<td>5.5</td>
+<td>13.4</td>
+<td>8979</td>
+<td>2015</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">571</td>
+<td>2015-02-01</td>
+<td>12095.9</td>
+<td>320534</td>
+<td>5.7</td>
+<td>13.1</td>
+<td>8705</td>
+<td>2015</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">572</td>
+<td>2015-03-01</td>
+<td>12161.5</td>
+<td>320707</td>
+<td>5.2</td>
+<td>12.2</td>
+<td>8575</td>
+<td>2015</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">573</td>
+<td>2015-04-01</td>
+<td>12158.9</td>
+<td>320887</td>
+<td>5.6</td>
+<td>11.7</td>
+<td>8549</td>
+<td>2015</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+
+<p>574 rows × 8 columns</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="time-series-visualization" class="level1">
+<h1>Time Series Visualization</h1>
+<section id="time-series-plots" class="level2">
+<h2 class="anchored" data-anchor-id="time-series-plots">Time Series Plots</h2>
+<section id="plot-1-dot-chart" class="level3">
+<h3 class="anchored" data-anchor-id="plot-1-dot-chart">Plot 1: Dot chart</h3>
+<div id="79f1e399" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    ggplot(economics, aes(x<span class="op">=</span><span class="st">'date'</span>, y<span class="op">=</span><span class="st">'uempmed'</span>)) </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> geom_point() <span class="co"># line plot</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> labs(x<span class="op">=</span><span class="st">'date'</span>, y<span class="op">=</span><span class="st">'median duration of unemployment, in week'</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-6-output-1.png" width="640" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-2-line-chart" class="level3">
+<h3 class="anchored" data-anchor-id="plot-2-line-chart">Plot 2: Line chart</h3>
+<div id="b400e3ed" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    ggplot(economics, aes(x<span class="op">=</span><span class="st">'date'</span>, y<span class="op">=</span><span class="st">'uempmed'</span>)) <span class="op">+</span> geom_line() </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-7-output-1.png" width="640" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-3-dot-and-line-chart" class="level3">
+<h3 class="anchored" data-anchor-id="plot-3-dot-and-line-chart">Plot 3: Dot and Line Chart</h3>
+<div id="b7fa4f6f" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    ggplot(economics, aes(x<span class="op">=</span><span class="st">'date'</span>, y<span class="op">=</span><span class="st">'uempmed'</span>)) <span class="op">+</span> geom_line() <span class="op">+</span> geom_point()</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-8-output-1.png" width="640" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="change-point-size" class="level3">
+<h3 class="anchored" data-anchor-id="change-point-size">Change Point Size</h3>
+<div id="139b7042" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ggplot(economics, aes(x<span class="op">=</span><span class="st">'date'</span>, y<span class="op">=</span><span class="st">'uempmed'</span>)) <span class="op">+</span> geom_line() <span class="op">+</span> geom_point(size<span class="op">=</span><span class="fl">0.3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-9-output-1.png" width="640" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="change-point-colour" class="level3">
+<h3 class="anchored" data-anchor-id="change-point-colour">Change Point Colour</h3>
+<div id="5dc339e3" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ggplot(economics, aes(x<span class="op">=</span><span class="st">'date'</span>, y<span class="op">=</span><span class="st">'uempmed'</span>)) <span class="op">+</span> geom_line() <span class="op">+</span> geom_point(size<span class="op">=</span><span class="fl">0.3</span>, colour<span class="op">=</span><span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-10-output-1.png" width="640" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="question-1-which-is-the-best-plot1-plot-2-or-plot-3" class="level3">
+<h3 class="anchored" data-anchor-id="question-1-which-is-the-best-plot1-plot-2-or-plot-3">Question 1: Which is the best? Plot1, Plot 2, or Plot 3</h3>
+</section>
+</section>
+<section id="seasonal-plots" class="level2">
+<h2 class="anchored" data-anchor-id="seasonal-plots">Seasonal plots</h2>
+<section id="seasonal-plot-with-lines" class="level3">
+<h3 class="anchored" data-anchor-id="seasonal-plot-with-lines">Seasonal plot with lines</h3>
+<div id="ab219cb7" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ggplot(economics, aes(x<span class="op">=</span><span class="st">'month'</span>, y<span class="op">=</span><span class="st">'uempmed'</span>, color<span class="op">=</span><span class="st">'year'</span>))<span class="op">+</span>geom_point()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-11-output-1.png" width="640" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="seasonal-plot-with-lines-1" class="level3">
+<h3 class="anchored" data-anchor-id="seasonal-plot-with-lines-1">Seasonal plot with lines</h3>
+<div id="2dd395ed" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ggplot(economics, aes(x<span class="op">=</span><span class="st">'month'</span>, y<span class="op">=</span><span class="st">'uempmed'</span>,group<span class="op">=</span><span class="st">'year'</span> ,color<span class="op">=</span><span class="st">'year'</span>))<span class="op">+</span>geom_point()<span class="op">+</span>geom_line()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-12-output-1.png" width="640" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="question-2-what-potential-issues-or-areas-for-improvement-can-you-identify-in-the-plot" class="level3">
+<h3 class="anchored" data-anchor-id="question-2-what-potential-issues-or-areas-for-improvement-can-you-identify-in-the-plot">Question 2: What potential issues or areas for improvement can you identify in the plot?</h3>
+</section>
+<section id="fix-x-axis" class="level3">
+<h3 class="anchored" data-anchor-id="fix-x-axis">Fix x-axis</h3>
+<div id="15917cc4" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ggplot(economics, aes(x<span class="op">=</span><span class="st">'month'</span>, y<span class="op">=</span><span class="st">'uempmed'</span>,group<span class="op">=</span><span class="st">'year'</span> ,color<span class="op">=</span><span class="st">'year'</span>))<span class="op">+</span>geom_point()<span class="op">+</span>geom_line()<span class="op">+</span>scale_x_continuous(breaks<span class="op">=</span><span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">13</span>))  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-13-output-1.png" width="640" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="add-titles" class="level3">
+<h3 class="anchored" data-anchor-id="add-titles">Add titles</h3>
+<div id="330a5c1c" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>    ggplot(economics, aes(x<span class="op">=</span><span class="st">'month'</span>, y<span class="op">=</span><span class="st">'uempmed'</span>, group<span class="op">=</span><span class="st">'year'</span>, color<span class="op">=</span><span class="st">'year'</span>)) <span class="op">+</span> geom_point() <span class="op">+</span> geom_line() <span class="op">+</span> scale_x_continuous(breaks<span class="op">=</span><span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">13</span>)) <span class="op">+</span>  labs(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"Median Duration of Unemployment by Month"</span>,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span><span class="st">"Month"</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>        y<span class="op">=</span><span class="st">"Unemployment"</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">"Year"</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">+</span> theme_minimal()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-14-output-1.png" width="640" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="box-plots-monthly-variation" class="level3">
+<h3 class="anchored" data-anchor-id="box-plots-monthly-variation">Box-plots: monthly variation</h3>
+<div id="555444f8" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>    ggplot(economics, aes(x<span class="op">=</span><span class="st">'month'</span>, y<span class="op">=</span><span class="st">'uempmed'</span>, group<span class="op">=</span><span class="st">'month'</span>, color<span class="op">=</span><span class="st">'month'</span>)) <span class="op">+</span> geom_boxplot() <span class="op">+</span> scale_x_continuous(breaks<span class="op">=</span><span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">13</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-15-output-1.png" width="640" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="box-plots-yearly-variation" class="level3">
+<h3 class="anchored" data-anchor-id="box-plots-yearly-variation">Box-plots: yearly variation</h3>
+<div id="6a64f9a2" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>    ggplot(economics, aes(x<span class="op">=</span><span class="st">'year'</span>, y<span class="op">=</span><span class="st">'uempmed'</span>, group<span class="op">=</span><span class="st">'year'</span>, color<span class="op">=</span><span class="st">'year'</span>)) <span class="op">+</span> geom_boxplot() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-16-output-1.png" width="640" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="exercise-1" class="level1">
+<h1>Exercise 1</h1>
+<p>Visualize <a href="AirPassengers.csv">Air Passengers</a> dataset.</p>
+<p>Step 1: Read data</p>
+<div id="bfb040ac" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>airpassenger <span class="op">=</span> pd.read_csv(<span class="st">'AirPassengers.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Step 2: About the dataset</p>
+<div id="822fad64" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>airpassenger</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="64">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Month</th>
+<th data-quarto-table-cell-role="th">#Passengers</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1949-01</td>
+<td>112</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>1949-02</td>
+<td>118</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>1949-03</td>
+<td>132</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>1949-04</td>
+<td>129</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>1949-05</td>
+<td>121</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">139</td>
+<td>1960-08</td>
+<td>606</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">140</td>
+<td>1960-09</td>
+<td>508</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">141</td>
+<td>1960-10</td>
+<td>461</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">142</td>
+<td>1960-11</td>
+<td>390</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">143</td>
+<td>1960-12</td>
+<td>432</td>
+</tr>
+</tbody>
+</table>
+
+<p>144 rows × 2 columns</p>
+</div>
+</div>
+</div>
+<div id="00c96aa4" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>airpassenger.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="65">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Month</th>
+<th data-quarto-table-cell-role="th">#Passengers</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1949-01</td>
+<td>112</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>1949-02</td>
+<td>118</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>1949-03</td>
+<td>132</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>1949-04</td>
+<td>129</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>1949-05</td>
+<td>121</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="74f35608" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>airpassenger.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 144 entries, 0 to 143
+Data columns (total 2 columns):
+ #   Column       Non-Null Count  Dtype 
+---  ------       --------------  ----- 
+ 0   Month        144 non-null    object
+ 1   #Passengers  144 non-null    int64 
+dtypes: int64(1), object(1)
+memory usage: 2.4+ KB</code></pre>
+</div>
+</div>
+</section>
+<section id="time-series-data-wrangling-part-2-type-convertions" class="level1">
+<h1>Time Series Data Wrangling Part 2: Type Convertions</h1>
+<section id="cross-sectional-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="cross-sectional-dataset">Cross Sectional Dataset</h2>
+<div id="9d72d5b6" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ID"</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>],</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"calories"</span>: [<span class="dv">420</span>, <span class="dv">380</span>, <span class="dv">390</span>]</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co">#load data into a DataFrame object:</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>dfc <span class="op">=</span> pd.DataFrame(data)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>dfc</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>dfc.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 3 entries, 0 to 2
+Data columns (total 2 columns):
+ #   Column    Non-Null Count  Dtype
+---  ------    --------------  -----
+ 0   ID        3 non-null      int64
+ 1   calories  3 non-null      int64
+dtypes: int64(2)
+memory usage: 180.0 bytes</code></pre>
+</div>
+</div>
+</section>
+<section id="time-series-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="time-series-dataset">Time Series Dataset</h2>
+<div id="0d13d78e" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Year"</span>: [<span class="dv">2019</span>, <span class="dv">2020</span>, <span class="dv">2021</span>],</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Sales"</span>: [<span class="dv">490</span>, <span class="dv">980</span>, <span class="dv">260</span>]</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co">#load data into a DataFrame object:</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>dft <span class="op">=</span> pd.DataFrame(data)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>dft</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>dft.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 3 entries, 0 to 2
+Data columns (total 2 columns):
+ #   Column  Non-Null Count  Dtype
+---  ------  --------------  -----
+ 0   Year    3 non-null      int64
+ 1   Sales   3 non-null      int64
+dtypes: int64(2)
+memory usage: 180.0 bytes</code></pre>
+</div>
+</div>
+</section>
+<section id="air-passenger-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="air-passenger-dataset">Air Passenger Dataset</h2>
+<div id="2fe07b06" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>airpassenger.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 144 entries, 0 to 143
+Data columns (total 2 columns):
+ #   Column       Non-Null Count  Dtype 
+---  ------       --------------  ----- 
+ 0   Month        144 non-null    object
+ 1   #Passengers  144 non-null    int64 
+dtypes: int64(1), object(1)
+memory usage: 2.4+ KB</code></pre>
+</div>
+</div>
+<section id="time-series-plot-for-air-passenger-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="time-series-plot-for-air-passenger-dataset">Time Series Plot for Air Passenger Dataset</h3>
+<div id="f06829fa" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>ggplot(airpassenger, aes(x<span class="op">=</span><span class="st">'Month'</span>, y<span class="op">=</span><span class="st">'#Passengers'</span>))<span class="op">+</span>geom_line()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-24-output-1.png" width="640" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="convert-to-time-column" class="level2">
+<h2 class="anchored" data-anchor-id="convert-to-time-column">Convert to Time Column</h2>
+<div id="d067c2e7" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>airpassenger[<span class="st">'Month'</span>]<span class="op">=</span> pd.to_datetime(airpassenger[<span class="st">'Month'</span>])</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>airpassenger.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 144 entries, 0 to 143
+Data columns (total 2 columns):
+ #   Column       Non-Null Count  Dtype         
+---  ------       --------------  -----         
+ 0   Month        144 non-null    datetime64[ns]
+ 1   #Passengers  144 non-null    int64         
+dtypes: datetime64[ns](1), int64(1)
+memory usage: 2.4 KB</code></pre>
+</div>
+</div>
+<!--https://thiyanga-spatiotemporal.netlify.app/posts/time_series/file1.html#/seasonal-plots-6-->
+</section>
+</section>
+<section id="index---yearly" class="level1">
+<h1>Index - Yearly</h1>
+<section id="method-1" class="level2">
+<h2 class="anchored" data-anchor-id="method-1">Method 1</h2>
+<div id="f4109208" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>index1 <span class="op">=</span> pd.DatetimeIndex([<span class="st">'2012'</span>, <span class="st">'2013'</span>, <span class="st">'2014'</span>, <span class="st">'2015'</span>, <span class="st">'2016'</span>])</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>data1 <span class="op">=</span> pd.Series([<span class="dv">123</span>, <span class="dv">39</span>, <span class="dv">78</span>, <span class="dv">52</span>, <span class="dv">110</span>], index<span class="op">=</span>index1)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>data1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="72">
+<pre><code>2012-01-01    123
+2013-01-01     39
+2014-01-01     78
+2015-01-01     52
+2016-01-01    110
+dtype: int64</code></pre>
+</div>
+</div>
+</section>
+<section id="method-2" class="level2">
+<h2 class="anchored" data-anchor-id="method-2">Method 2</h2>
+<p>freq=‘AS’ for start of year</p>
+<div id="8e2331e3" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>index2 <span class="op">=</span> pd.date_range(<span class="st">"2012"</span>, periods<span class="op">=</span><span class="dv">5</span>, freq<span class="op">=</span><span class="st">'AS'</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>index2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="73">
+<pre><code>DatetimeIndex(['2012-01-01', '2013-01-01', '2014-01-01', '2015-01-01',
+               '2016-01-01'],
+              dtype='datetime64[ns]', freq='AS-JAN')</code></pre>
+</div>
+</div>
+<div id="b89cd2de" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>data2 <span class="op">=</span> pd.Series([<span class="dv">123</span>, <span class="dv">39</span>, <span class="dv">78</span>, <span class="dv">52</span>, <span class="dv">110</span>], index<span class="op">=</span>index2)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>data2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="74">
+<pre><code>2012-01-01    123
+2013-01-01     39
+2014-01-01     78
+2015-01-01     52
+2016-01-01    110
+Freq: AS-JAN, dtype: int64</code></pre>
+</div>
+</div>
+</section>
+<section id="method-3" class="level2">
+<h2 class="anchored" data-anchor-id="method-3">Method 3</h2>
+<p>freq=‘A’ end of year frequency</p>
+<div id="79a62e91" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>index3 <span class="op">=</span> pd.date_range(<span class="st">"2012"</span>, periods<span class="op">=</span><span class="dv">5</span>, freq<span class="op">=</span><span class="st">'A'</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>index3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="75">
+<pre><code>DatetimeIndex(['2012-12-31', '2013-12-31', '2014-12-31', '2015-12-31',
+               '2016-12-31'],
+              dtype='datetime64[ns]', freq='A-DEC')</code></pre>
+</div>
+</div>
+<div id="283ec8ec" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>data3 <span class="op">=</span> pd.Series([<span class="dv">123</span>, <span class="dv">39</span>, <span class="dv">78</span>, <span class="dv">52</span>, <span class="dv">110</span>], index<span class="op">=</span>index3)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>data3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="76">
+<pre><code>2012-12-31    123
+2013-12-31     39
+2014-12-31     78
+2015-12-31     52
+2016-12-31    110
+Freq: A-DEC, dtype: int64</code></pre>
+</div>
+</div>
+</section>
+<section id="method-4" class="level2">
+<h2 class="anchored" data-anchor-id="method-4">Method 4</h2>
+<p>Annual indexing with arbitrary month</p>
+<div id="44cf0881" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>index4 <span class="op">=</span> pd.date_range(<span class="st">"2012"</span>, periods<span class="op">=</span><span class="dv">5</span>, freq<span class="op">=</span><span class="st">'AS-NOV'</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>index4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="77">
+<pre><code>DatetimeIndex(['2012-11-01', '2013-11-01', '2014-11-01', '2015-11-01',
+               '2016-11-01'],
+              dtype='datetime64[ns]', freq='AS-NOV')</code></pre>
+</div>
+</div>
+<div id="f224bc34" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>data4 <span class="op">=</span> pd.Series([<span class="dv">123</span>, <span class="dv">39</span>, <span class="dv">78</span>, <span class="dv">52</span>, <span class="dv">110</span>], index<span class="op">=</span>index4)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>data4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="78">
+<pre><code>2012-11-01    123
+2013-11-01     39
+2014-11-01     78
+2015-11-01     52
+2016-11-01    110
+Freq: AS-NOV, dtype: int64</code></pre>
+</div>
+</div>
+</section>
+<section id="method-5" class="level2">
+<h2 class="anchored" data-anchor-id="method-5">Method 5</h2>
+<p>Year Only</p>
+<div id="5ed7a43c" class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>index <span class="op">=</span> pd.period_range(<span class="st">'2012-01'</span>, periods<span class="op">=</span><span class="dv">8</span>, freq<span class="op">=</span><span class="st">'A'</span>)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>index</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="79">
+<pre><code>PeriodIndex(['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019'], dtype='period[A-DEC]')</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="index---monthly" class="level1">
+<h1>Index - Monthly</h1>
+<section id="method-1-1" class="level2">
+<h2 class="anchored" data-anchor-id="method-1-1">Method 1</h2>
+<div id="c3af6ed5" class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>index <span class="op">=</span> pd.period_range(<span class="st">'2022-01'</span>, periods<span class="op">=</span><span class="dv">8</span>, freq<span class="op">=</span><span class="st">'M'</span>)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>index</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="80">
+<pre><code>PeriodIndex(['2022-01', '2022-02', '2022-03', '2022-04', '2022-05', '2022-06',
+             '2022-07', '2022-08'],
+            dtype='period[M]')</code></pre>
+</div>
+</div>
+</section>
+<section id="method-2-1" class="level2">
+<h2 class="anchored" data-anchor-id="method-2-1">Method 2</h2>
+<div id="e1014852" class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>index <span class="op">=</span> pd.period_range(start<span class="op">=</span><span class="st">'2022-01-01'</span>, end<span class="op">=</span><span class="st">'2022-08-02'</span>, freq<span class="op">=</span><span class="st">'M'</span>)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>index</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="81">
+<pre><code>PeriodIndex(['2022-01', '2022-02', '2022-03', '2022-04', '2022-05', '2022-06',
+             '2022-07', '2022-08'],
+            dtype='period[M]')</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="index---quarterly" class="level1">
+<h1>Index - Quarterly</h1>
+<div id="f963c557" class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>index <span class="op">=</span> pd.period_range(<span class="st">'2022-01'</span>, periods<span class="op">=</span><span class="dv">8</span>, freq<span class="op">=</span><span class="st">'Q'</span>)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>index</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="82">
+<pre><code>PeriodIndex(['2022Q1', '2022Q2', '2022Q3', '2022Q4', '2023Q1', '2023Q2',
+             '2023Q3', '2023Q4'],
+            dtype='period[Q-DEC]')</code></pre>
+</div>
+</div>
+</section>
+<section id="index---daily" class="level1">
+<h1>Index - Daily</h1>
+<div id="7d6469e6" class="cell" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>index <span class="op">=</span> pd.period_range(<span class="st">'2022-01-01'</span>, periods<span class="op">=</span><span class="dv">8</span>, freq<span class="op">=</span><span class="st">'D'</span>)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>index</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="83">
+<pre><code>PeriodIndex(['2022-01-01', '2022-01-02', '2022-01-03', '2022-01-04',
+             '2022-01-05', '2022-01-06', '2022-01-07', '2022-01-08'],
+            dtype='period[D]')</code></pre>
+</div>
+</div>
+</section>
+<section id="index---hourly" class="level1">
+<h1>Index - hourly</h1>
+<section id="method-1-2" class="level2">
+<h2 class="anchored" data-anchor-id="method-1-2">Method 1</h2>
+<p>Range of hourly timestamps</p>
+<div id="35bd27bd" class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>pd.period_range(<span class="st">'2022-01'</span>, periods<span class="op">=</span><span class="dv">8</span>, freq<span class="op">=</span><span class="st">'H'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="84">
+<pre><code>PeriodIndex(['2022-01-01 00:00', '2022-01-01 01:00', '2022-01-01 02:00',
+             '2022-01-01 03:00', '2022-01-01 04:00', '2022-01-01 05:00',
+             '2022-01-01 06:00', '2022-01-01 07:00'],
+            dtype='period[H]')</code></pre>
+</div>
+</div>
+</section>
+<section id="method-2-2" class="level2">
+<h2 class="anchored" data-anchor-id="method-2-2">Method 2</h2>
+<div id="86caab33" class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>pd.timedelta_range(<span class="dv">0</span>, periods<span class="op">=</span><span class="dv">10</span>, freq<span class="op">=</span><span class="st">'H'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="85">
+<pre><code>TimedeltaIndex(['0 days 00:00:00', '0 days 01:00:00', '0 days 02:00:00',
+                '0 days 03:00:00', '0 days 04:00:00', '0 days 05:00:00',
+                '0 days 06:00:00', '0 days 07:00:00', '0 days 08:00:00',
+                '0 days 09:00:00'],
+               dtype='timedelta64[ns]', freq='H')</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="acf-and-pacf-plots" class="level1">
+<h1>ACF and PACF plots</h1>
+<section id="preparing-data" class="level2">
+<h2 class="anchored" data-anchor-id="preparing-data">Preparing data</h2>
+<div id="872af6fb" class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.graphics.tsaplots <span class="im">import</span> plot_acf, plot_pacf</span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Select relevant data, index by Date</span></span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> airpassenger[[<span class="st">'Month'</span>, <span class="st">'#Passengers'</span>]].set_index([<span class="st">'Month'</span>])</span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the ACF (via statsmodel)</span></span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="86">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">#Passengers</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Month</th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1949-01-01</td>
+<td>112</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1949-02-01</td>
+<td>118</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1949-03-01</td>
+<td>132</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1949-04-01</td>
+<td>129</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1949-05-01</td>
+<td>121</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1960-08-01</td>
+<td>606</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1960-09-01</td>
+<td>508</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1960-10-01</td>
+<td>461</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1960-11-01</td>
+<td>390</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1960-12-01</td>
+<td>432</td>
+</tr>
+</tbody>
+</table>
+
+<p>144 rows × 1 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="acf-plot" class="level2">
+<h2 class="anchored" data-anchor-id="acf-plot">ACF plot</h2>
+<div id="aea2a225" class="cell" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>data.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+DatetimeIndex: 144 entries, 1949-01-01 to 1960-12-01
+Data columns (total 1 columns):
+ #   Column       Non-Null Count  Dtype
+---  ------       --------------  -----
+ 0   #Passengers  144 non-null    int64
+dtypes: int64(1)
+memory usage: 2.2 KB</code></pre>
+</div>
+</div>
+<div id="99292122" class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">5</span>))</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>plot_acf(data, lags<span class="op">=</span><span class="dv">50</span>)</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">'ACF Plot'</span>)</span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>plot_pacf(data, lags<span class="op">=</span><span class="dv">50</span>)</span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">'PACF Plot'</span>)</span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-42-output-1.png" width="1152" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-42-output-2.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-42-output-3.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="your-turn-obtain-acf-and-pacf-plot-for-economics-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="your-turn-obtain-acf-and-pacf-plot-for-economics-dataset">Your turn: Obtain ACF and PACF plot for economics dataset</h3>
+</section>
+</section>
+</section>
+<section id="generate-time-dependent-variables" class="level1">
+<h1>Generate Time Dependent Variables</h1>
+<section id="generate-a-sequence" class="level2">
+<h2 class="anchored" data-anchor-id="generate-a-sequence">Generate a sequence</h2>
+<div id="bc1577d5" class="cell" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_format <span class="op">=</span> <span class="st">'svg'</span> </span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
+<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> ceil</span>
+<span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span> <span class="co"># use python's ggplot2</span></span>
+<span id="cb63-11"><a href="#cb63-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-12"><a href="#cb63-12" aria-hidden="true" tabindex="-1"></a>ts <span class="op">=</span> pd.date_range(<span class="st">'1/1/2020'</span>, periods <span class="op">=</span> <span class="dv">366</span>) <span class="co"># generate 2020 all year data, sum up 366 days</span></span>
+<span id="cb63-13"><a href="#cb63-13" aria-hidden="true" tabindex="-1"></a>ts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="89">
+<pre><code>DatetimeIndex(['2020-01-01', '2020-01-02', '2020-01-03', '2020-01-04',
+               '2020-01-05', '2020-01-06', '2020-01-07', '2020-01-08',
+               '2020-01-09', '2020-01-10',
+               ...
+               '2020-12-22', '2020-12-23', '2020-12-24', '2020-12-25',
+               '2020-12-26', '2020-12-27', '2020-12-28', '2020-12-29',
+               '2020-12-30', '2020-12-31'],
+              dtype='datetime64[ns]', length=366, freq='D')</code></pre>
+</div>
+</div>
+</section>
+<section id="convert-datetime-into-string" class="level2">
+<h2 class="anchored" data-anchor-id="convert-datetime-into-string">convert Datetime into string</h2>
+<div id="c253dbb5" class="cell" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>ts <span class="op">=</span> pd.Series(ts).<span class="bu">apply</span>(<span class="bu">str</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="extract-yyyy-mm-dd-date" class="level2">
+<h2 class="anchored" data-anchor-id="extract-yyyy-mm-dd-date">extract YYYY-MM-DD date</h2>
+<div id="e12c4477" class="cell" data-execution_count="44">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>new <span class="op">=</span> ts.<span class="bu">str</span>.split(<span class="st">" "</span>, n <span class="op">=</span> <span class="dv">1</span>, expand <span class="op">=</span> <span class="va">True</span>) <span class="co"># extract YYYY-MM-DD date </span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>new</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="91">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">0</th>
+<th data-quarto-table-cell-role="th">1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2020-01-01</td>
+<td>00:00:00</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2020-01-02</td>
+<td>00:00:00</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2020-01-03</td>
+<td>00:00:00</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>2020-01-04</td>
+<td>00:00:00</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>2020-01-05</td>
+<td>00:00:00</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">361</td>
+<td>2020-12-27</td>
+<td>00:00:00</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">362</td>
+<td>2020-12-28</td>
+<td>00:00:00</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">363</td>
+<td>2020-12-29</td>
+<td>00:00:00</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">364</td>
+<td>2020-12-30</td>
+<td>00:00:00</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">365</td>
+<td>2020-12-31</td>
+<td>00:00:00</td>
+</tr>
+</tbody>
+</table>
+
+<p>366 rows × 2 columns</p>
+</div>
+</div>
+</div>
+<div id="9a74ad9c" class="cell" data-execution_count="45">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>ts <span class="op">=</span> new[<span class="dv">0</span>]</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>ts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="92">
+<pre><code>0      2020-01-01
+1      2020-01-02
+2      2020-01-03
+3      2020-01-04
+4      2020-01-05
+          ...    
+361    2020-12-27
+362    2020-12-28
+363    2020-12-29
+364    2020-12-30
+365    2020-12-31
+Name: 0, Length: 366, dtype: object</code></pre>
+</div>
+</div>
+</section>
+<section id="slicing-month-from-yyyy-mm-dd-format" class="level2">
+<h2 class="anchored" data-anchor-id="slicing-month-from-yyyy-mm-dd-format">Slicing month from YYYY-MM-DD format</h2>
+<div id="530ceb79" class="cell" data-execution_count="46">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>month <span class="op">=</span> ts.<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">int</span>(x[<span class="dv">5</span>:<span class="dv">7</span>])) </span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>month</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="93">
+<pre><code>0       1
+1       1
+2       1
+3       1
+4       1
+       ..
+361    12
+362    12
+363    12
+364    12
+365    12
+Name: 0, Length: 366, dtype: int64</code></pre>
+</div>
+</div>
+</section>
+<section id="slicing-day-from-yyyy-mm-dd-format" class="level2">
+<h2 class="anchored" data-anchor-id="slicing-day-from-yyyy-mm-dd-format">Slicing day from YYYY-MM-DD format</h2>
+<div id="55407a22" class="cell" data-execution_count="47">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>month <span class="op">=</span> ts.<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">int</span>(x[<span class="dv">8</span>:<span class="dv">10</span>])) </span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>month</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="94">
+<pre><code>0       1
+1       2
+2       3
+3       4
+4       5
+       ..
+361    27
+362    28
+363    29
+364    30
+365    31
+Name: 0, Length: 366, dtype: int64</code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

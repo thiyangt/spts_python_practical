@@ -1,0 +1,191 @@
+[
+  {
+    "objectID": "Practical1/index.html",
+    "href": "Practical1/index.html",
+    "title": "DSA 554 3.0 Spatio-temporal Data Analysis",
+    "section": "",
+    "text": "import pandas as pd\nimport plotnine as p9 \nfrom plotnine import *\nfrom plotnine.data import *\nimport numpy as np"
+  },
+  {
+    "objectID": "Practical1/index.html#economics-data-set",
+    "href": "Practical1/index.html#economics-data-set",
+    "title": "DSA 554 3.0 Spatio-temporal Data Analysis",
+    "section": "economics data set",
+    "text": "economics data set\n\neconomics\n\n\n\n\n\n\n\n\ndate\npce\npop\npsavert\nuempmed\nunemploy\nyear\nmonth\n\n\n\n\n0\n1967-07-01\n507.4\n198712\n12.5\n4.5\n2944\n1967\n7\n\n\n1\n1967-08-01\n510.5\n198911\n12.5\n4.7\n2945\n1967\n8\n\n\n2\n1967-09-01\n516.3\n199113\n11.7\n4.6\n2958\n1967\n9\n\n\n3\n1967-10-01\n512.9\n199311\n12.5\n4.9\n3143\n1967\n10\n\n\n4\n1967-11-01\n518.1\n199498\n12.5\n4.7\n3066\n1967\n11\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n569\n2014-12-01\n12122.0\n320201\n5.0\n12.6\n8688\n2014\n12\n\n\n570\n2015-01-01\n12080.8\n320367\n5.5\n13.4\n8979\n2015\n1\n\n\n571\n2015-02-01\n12095.9\n320534\n5.7\n13.1\n8705\n2015\n2\n\n\n572\n2015-03-01\n12161.5\n320707\n5.2\n12.2\n8575\n2015\n3\n\n\n573\n2015-04-01\n12158.9\n320887\n5.6\n11.7\n8549\n2015\n4\n\n\n\n\n574 rows × 8 columns\n\n\n\n\neconomics.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 574 entries, 0 to 573\nData columns (total 8 columns):\n #   Column    Non-Null Count  Dtype         \n---  ------    --------------  -----         \n 0   date      574 non-null    datetime64[ns]\n 1   pce       574 non-null    float64       \n 2   pop       574 non-null    int64         \n 3   psavert   574 non-null    float64       \n 4   uempmed   574 non-null    float64       \n 5   unemploy  574 non-null    int64         \n 6   year      574 non-null    int32         \n 7   month     574 non-null    int32         \ndtypes: datetime64[ns](1), float64(3), int32(2), int64(2)\nmemory usage: 31.5 KB"
+  },
+  {
+    "objectID": "Practical1/index.html#task-1-create-year-and-month-columns",
+    "href": "Practical1/index.html#task-1-create-year-and-month-columns",
+    "title": "DSA 554 3.0 Spatio-temporal Data Analysis",
+    "section": "Task 1: Create year and month columns",
+    "text": "Task 1: Create year and month columns\n\neconomics['year'] = economics['date'].dt.year\neconomics['month'] = economics['date'].dt.month\neconomics\n\n\n\n\n\n\n\n\ndate\npce\npop\npsavert\nuempmed\nunemploy\nyear\nmonth\n\n\n\n\n0\n1967-07-01\n507.4\n198712\n12.5\n4.5\n2944\n1967\n7\n\n\n1\n1967-08-01\n510.5\n198911\n12.5\n4.7\n2945\n1967\n8\n\n\n2\n1967-09-01\n516.3\n199113\n11.7\n4.6\n2958\n1967\n9\n\n\n3\n1967-10-01\n512.9\n199311\n12.5\n4.9\n3143\n1967\n10\n\n\n4\n1967-11-01\n518.1\n199498\n12.5\n4.7\n3066\n1967\n11\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n569\n2014-12-01\n12122.0\n320201\n5.0\n12.6\n8688\n2014\n12\n\n\n570\n2015-01-01\n12080.8\n320367\n5.5\n13.4\n8979\n2015\n1\n\n\n571\n2015-02-01\n12095.9\n320534\n5.7\n13.1\n8705\n2015\n2\n\n\n572\n2015-03-01\n12161.5\n320707\n5.2\n12.2\n8575\n2015\n3\n\n\n573\n2015-04-01\n12158.9\n320887\n5.6\n11.7\n8549\n2015\n4\n\n\n\n\n574 rows × 8 columns"
+  },
+  {
+    "objectID": "Practical1/index.html#time-series-plots",
+    "href": "Practical1/index.html#time-series-plots",
+    "title": "DSA 554 3.0 Spatio-temporal Data Analysis",
+    "section": "Time Series Plots",
+    "text": "Time Series Plots\n\nPlot 1: Dot chart\n\n%matplotlib inline\n(\n    ggplot(economics, aes(x='date', y='uempmed')) \n    + geom_point() # line plot\n    + labs(x='date', y='median duration of unemployment, in week')\n)\n\n\n\n\n\n\n\n\n\n\nPlot 2: Line chart\n\n%matplotlib inline\n(\n    ggplot(economics, aes(x='date', y='uempmed')) + geom_line() \n)\n\n\n\n\n\n\n\n\n\n\nPlot 3: Dot and Line Chart\n\n%matplotlib inline\n(\n    ggplot(economics, aes(x='date', y='uempmed')) + geom_line() + geom_point()\n)\n\n\n\n\n\n\n\n\n\n\nChange Point Size\n\nggplot(economics, aes(x='date', y='uempmed')) + geom_line() + geom_point(size=0.3)\n\n\n\n\n\n\n\n\n\n\nChange Point Colour\n\nggplot(economics, aes(x='date', y='uempmed')) + geom_line() + geom_point(size=0.3, colour=\"blue\")\n\n\n\n\n\n\n\n\n\n\nQuestion 1: Which is the best? Plot1, Plot 2, or Plot 3"
+  },
+  {
+    "objectID": "Practical1/index.html#seasonal-plots",
+    "href": "Practical1/index.html#seasonal-plots",
+    "title": "DSA 554 3.0 Spatio-temporal Data Analysis",
+    "section": "Seasonal plots",
+    "text": "Seasonal plots\n\nSeasonal plot with lines\n\nggplot(economics, aes(x='month', y='uempmed', color='year'))+geom_point()\n\n\n\n\n\n\n\n\n\n\nSeasonal plot with lines\n\nggplot(economics, aes(x='month', y='uempmed',group='year' ,color='year'))+geom_point()+geom_line()\n\n\n\n\n\n\n\n\n\n\nQuestion 2: What potential issues or areas for improvement can you identify in the plot?\n\n\nFix x-axis\n\nggplot(economics, aes(x='month', y='uempmed',group='year' ,color='year'))+geom_point()+geom_line()+scale_x_continuous(breaks=range(1, 13))  \n\n\n\n\n\n\n\n\n\n\nAdd titles\n\n    ggplot(economics, aes(x='month', y='uempmed', group='year', color='year')) + geom_point() + geom_line() + scale_x_continuous(breaks=range(1, 13)) +  labs(\n        title=\"Median Duration of Unemployment by Month\",\n        x=\"Month\",\n        y=\"Unemployment\",\n        color=\"Year\"\n    ) + theme_minimal()\n\n\n\n\n\n\n\n\n\n\nBox-plots: monthly variation\n\n    ggplot(economics, aes(x='month', y='uempmed', group='month', color='month')) + geom_boxplot() + scale_x_continuous(breaks=range(1, 13))\n\n\n\n\n\n\n\n\n\n\nBox-plots: yearly variation\n\n    ggplot(economics, aes(x='year', y='uempmed', group='year', color='year')) + geom_boxplot()"
+  },
+  {
+    "objectID": "Practical1/index.html#cross-sectional-dataset",
+    "href": "Practical1/index.html#cross-sectional-dataset",
+    "title": "DSA 554 3.0 Spatio-temporal Data Analysis",
+    "section": "Cross Sectional Dataset",
+    "text": "Cross Sectional Dataset\n\nimport pandas as pd\ndata = {\n  \"ID\": [1, 2, 3],\n  \"calories\": [420, 380, 390]\n  \n}\n\n#load data into a DataFrame object:\ndfc = pd.DataFrame(data)\ndfc\ndfc.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 3 entries, 0 to 2\nData columns (total 2 columns):\n #   Column    Non-Null Count  Dtype\n---  ------    --------------  -----\n 0   ID        3 non-null      int64\n 1   calories  3 non-null      int64\ndtypes: int64(2)\nmemory usage: 180.0 bytes"
+  },
+  {
+    "objectID": "Practical1/index.html#time-series-dataset",
+    "href": "Practical1/index.html#time-series-dataset",
+    "title": "DSA 554 3.0 Spatio-temporal Data Analysis",
+    "section": "Time Series Dataset",
+    "text": "Time Series Dataset\n\ndata = {\n  \"Year\": [2019, 2020, 2021],\n  \"Sales\": [490, 980, 260]\n  \n}\n\n#load data into a DataFrame object:\ndft = pd.DataFrame(data)\ndft\ndft.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 3 entries, 0 to 2\nData columns (total 2 columns):\n #   Column  Non-Null Count  Dtype\n---  ------  --------------  -----\n 0   Year    3 non-null      int64\n 1   Sales   3 non-null      int64\ndtypes: int64(2)\nmemory usage: 180.0 bytes"
+  },
+  {
+    "objectID": "Practical1/index.html#air-passenger-dataset",
+    "href": "Practical1/index.html#air-passenger-dataset",
+    "title": "DSA 554 3.0 Spatio-temporal Data Analysis",
+    "section": "Air Passenger Dataset",
+    "text": "Air Passenger Dataset\n\nairpassenger.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 144 entries, 0 to 143\nData columns (total 2 columns):\n #   Column       Non-Null Count  Dtype \n---  ------       --------------  ----- \n 0   Month        144 non-null    object\n 1   #Passengers  144 non-null    int64 \ndtypes: int64(1), object(1)\nmemory usage: 2.4+ KB\n\n\n\nTime Series Plot for Air Passenger Dataset\n\nggplot(airpassenger, aes(x='Month', y='#Passengers'))+geom_line()"
+  },
+  {
+    "objectID": "Practical1/index.html#convert-to-time-column",
+    "href": "Practical1/index.html#convert-to-time-column",
+    "title": "DSA 554 3.0 Spatio-temporal Data Analysis",
+    "section": "Convert to Time Column",
+    "text": "Convert to Time Column\n\nfrom datetime import datetime\nairpassenger['Month']= pd.to_datetime(airpassenger['Month'])\nairpassenger.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 144 entries, 0 to 143\nData columns (total 2 columns):\n #   Column       Non-Null Count  Dtype         \n---  ------       --------------  -----         \n 0   Month        144 non-null    datetime64[ns]\n 1   #Passengers  144 non-null    int64         \ndtypes: datetime64[ns](1), int64(1)\nmemory usage: 2.4 KB"
+  },
+  {
+    "objectID": "Practical1/index.html#method-1",
+    "href": "Practical1/index.html#method-1",
+    "title": "DSA 554 3.0 Spatio-temporal Data Analysis",
+    "section": "Method 1",
+    "text": "Method 1\n\nindex1 = pd.DatetimeIndex(['2012', '2013', '2014', '2015', '2016'])\ndata1 = pd.Series([123, 39, 78, 52, 110], index=index1)\ndata1\n\n2012-01-01    123\n2013-01-01     39\n2014-01-01     78\n2015-01-01     52\n2016-01-01    110\ndtype: int64"
+  },
+  {
+    "objectID": "Practical1/index.html#method-2",
+    "href": "Practical1/index.html#method-2",
+    "title": "DSA 554 3.0 Spatio-temporal Data Analysis",
+    "section": "Method 2",
+    "text": "Method 2\nfreq=‘AS’ for start of year\n\nindex2 = pd.date_range(\"2012\", periods=5, freq='AS')\nindex2\n\nDatetimeIndex(['2012-01-01', '2013-01-01', '2014-01-01', '2015-01-01',\n               '2016-01-01'],\n              dtype='datetime64[ns]', freq='AS-JAN')\n\n\n\ndata2 = pd.Series([123, 39, 78, 52, 110], index=index2)\ndata2\n\n2012-01-01    123\n2013-01-01     39\n2014-01-01     78\n2015-01-01     52\n2016-01-01    110\nFreq: AS-JAN, dtype: int64"
+  },
+  {
+    "objectID": "Practical1/index.html#method-3",
+    "href": "Practical1/index.html#method-3",
+    "title": "DSA 554 3.0 Spatio-temporal Data Analysis",
+    "section": "Method 3",
+    "text": "Method 3\nfreq=‘A’ end of year frequency\n\nindex3 = pd.date_range(\"2012\", periods=5, freq='A')\nindex3\n\nDatetimeIndex(['2012-12-31', '2013-12-31', '2014-12-31', '2015-12-31',\n               '2016-12-31'],\n              dtype='datetime64[ns]', freq='A-DEC')\n\n\n\ndata3 = pd.Series([123, 39, 78, 52, 110], index=index3)\ndata3\n\n2012-12-31    123\n2013-12-31     39\n2014-12-31     78\n2015-12-31     52\n2016-12-31    110\nFreq: A-DEC, dtype: int64"
+  },
+  {
+    "objectID": "Practical1/index.html#method-4",
+    "href": "Practical1/index.html#method-4",
+    "title": "DSA 554 3.0 Spatio-temporal Data Analysis",
+    "section": "Method 4",
+    "text": "Method 4\nAnnual indexing with arbitrary month\n\nindex4 = pd.date_range(\"2012\", periods=5, freq='AS-NOV')\nindex4\n\nDatetimeIndex(['2012-11-01', '2013-11-01', '2014-11-01', '2015-11-01',\n               '2016-11-01'],\n              dtype='datetime64[ns]', freq='AS-NOV')\n\n\n\ndata4 = pd.Series([123, 39, 78, 52, 110], index=index4)\ndata4\n\n2012-11-01    123\n2013-11-01     39\n2014-11-01     78\n2015-11-01     52\n2016-11-01    110\nFreq: AS-NOV, dtype: int64"
+  },
+  {
+    "objectID": "Practical1/index.html#method-5",
+    "href": "Practical1/index.html#method-5",
+    "title": "DSA 554 3.0 Spatio-temporal Data Analysis",
+    "section": "Method 5",
+    "text": "Method 5\nYear Only\n\nindex = pd.period_range('2012-01', periods=8, freq='A')\nindex\n\nPeriodIndex(['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019'], dtype='period[A-DEC]')"
+  },
+  {
+    "objectID": "Practical1/index.html#method-1-1",
+    "href": "Practical1/index.html#method-1-1",
+    "title": "DSA 554 3.0 Spatio-temporal Data Analysis",
+    "section": "Method 1",
+    "text": "Method 1\n\nindex = pd.period_range('2022-01', periods=8, freq='M')\nindex\n\nPeriodIndex(['2022-01', '2022-02', '2022-03', '2022-04', '2022-05', '2022-06',\n             '2022-07', '2022-08'],\n            dtype='period[M]')"
+  },
+  {
+    "objectID": "Practical1/index.html#method-2-1",
+    "href": "Practical1/index.html#method-2-1",
+    "title": "DSA 554 3.0 Spatio-temporal Data Analysis",
+    "section": "Method 2",
+    "text": "Method 2\n\nindex = pd.period_range(start='2022-01-01', end='2022-08-02', freq='M')\nindex\n\nPeriodIndex(['2022-01', '2022-02', '2022-03', '2022-04', '2022-05', '2022-06',\n             '2022-07', '2022-08'],\n            dtype='period[M]')"
+  },
+  {
+    "objectID": "Practical1/index.html#method-1-2",
+    "href": "Practical1/index.html#method-1-2",
+    "title": "DSA 554 3.0 Spatio-temporal Data Analysis",
+    "section": "Method 1",
+    "text": "Method 1\nRange of hourly timestamps\n\npd.period_range('2022-01', periods=8, freq='H')\n\nPeriodIndex(['2022-01-01 00:00', '2022-01-01 01:00', '2022-01-01 02:00',\n             '2022-01-01 03:00', '2022-01-01 04:00', '2022-01-01 05:00',\n             '2022-01-01 06:00', '2022-01-01 07:00'],\n            dtype='period[H]')"
+  },
+  {
+    "objectID": "Practical1/index.html#method-2-2",
+    "href": "Practical1/index.html#method-2-2",
+    "title": "DSA 554 3.0 Spatio-temporal Data Analysis",
+    "section": "Method 2",
+    "text": "Method 2\n\npd.timedelta_range(0, periods=10, freq='H')\n\nTimedeltaIndex(['0 days 00:00:00', '0 days 01:00:00', '0 days 02:00:00',\n                '0 days 03:00:00', '0 days 04:00:00', '0 days 05:00:00',\n                '0 days 06:00:00', '0 days 07:00:00', '0 days 08:00:00',\n                '0 days 09:00:00'],\n               dtype='timedelta64[ns]', freq='H')"
+  },
+  {
+    "objectID": "Practical1/index.html#preparing-data",
+    "href": "Practical1/index.html#preparing-data",
+    "title": "DSA 554 3.0 Spatio-temporal Data Analysis",
+    "section": "Preparing data",
+    "text": "Preparing data\n\nimport pandas as pd\nfrom matplotlib import pyplot as plt\nfrom statsmodels.graphics.tsaplots import plot_acf, plot_pacf\n# Select relevant data, index by Date\ndata = airpassenger[['Month', '#Passengers']].set_index(['Month'])\n# Calculate the ACF (via statsmodel)\ndata\n\n\n\n\n\n\n\n\n#Passengers\n\n\nMonth\n\n\n\n\n\n1949-01-01\n112\n\n\n1949-02-01\n118\n\n\n1949-03-01\n132\n\n\n1949-04-01\n129\n\n\n1949-05-01\n121\n\n\n...\n...\n\n\n1960-08-01\n606\n\n\n1960-09-01\n508\n\n\n1960-10-01\n461\n\n\n1960-11-01\n390\n\n\n1960-12-01\n432\n\n\n\n\n144 rows × 1 columns"
+  },
+  {
+    "objectID": "Practical1/index.html#acf-plot",
+    "href": "Practical1/index.html#acf-plot",
+    "title": "DSA 554 3.0 Spatio-temporal Data Analysis",
+    "section": "ACF plot",
+    "text": "ACF plot\n\ndata.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nDatetimeIndex: 144 entries, 1949-01-01 to 1960-12-01\nData columns (total 1 columns):\n #   Column       Non-Null Count  Dtype\n---  ------       --------------  -----\n 0   #Passengers  144 non-null    int64\ndtypes: int64(1)\nmemory usage: 2.2 KB\n\n\n\nfig, axes = plt.subplots(1, 2, figsize=(12, 5))\nplot_acf(data, lags=50)\naxes[0].set_title('ACF Plot')\n\nplot_pacf(data, lags=50)\naxes[1].set_title('PACF Plot')\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nYour turn: Obtain ACF and PACF plot for economics dataset"
+  },
+  {
+    "objectID": "Practical1/index.html#generate-a-sequence",
+    "href": "Practical1/index.html#generate-a-sequence",
+    "title": "DSA 554 3.0 Spatio-temporal Data Analysis",
+    "section": "Generate a sequence",
+    "text": "Generate a sequence\n\n%matplotlib inline\n%config InlineBackend.figure_format = 'svg' \nimport warnings\nwarnings.filterwarnings('ignore')\n\nimport numpy as np\nimport pandas as pd\nimport datetime\nfrom math import ceil\nfrom plotnine import * # use python's ggplot2\n\nts = pd.date_range('1/1/2020', periods = 366) # generate 2020 all year data, sum up 366 days\nts\n\nDatetimeIndex(['2020-01-01', '2020-01-02', '2020-01-03', '2020-01-04',\n               '2020-01-05', '2020-01-06', '2020-01-07', '2020-01-08',\n               '2020-01-09', '2020-01-10',\n               ...\n               '2020-12-22', '2020-12-23', '2020-12-24', '2020-12-25',\n               '2020-12-26', '2020-12-27', '2020-12-28', '2020-12-29',\n               '2020-12-30', '2020-12-31'],\n              dtype='datetime64[ns]', length=366, freq='D')"
+  },
+  {
+    "objectID": "Practical1/index.html#convert-datetime-into-string",
+    "href": "Practical1/index.html#convert-datetime-into-string",
+    "title": "DSA 554 3.0 Spatio-temporal Data Analysis",
+    "section": "convert Datetime into string",
+    "text": "convert Datetime into string\n\nts = pd.Series(ts).apply(str)"
+  },
+  {
+    "objectID": "Practical1/index.html#extract-yyyy-mm-dd-date",
+    "href": "Practical1/index.html#extract-yyyy-mm-dd-date",
+    "title": "DSA 554 3.0 Spatio-temporal Data Analysis",
+    "section": "extract YYYY-MM-DD date",
+    "text": "extract YYYY-MM-DD date\n\nnew = ts.str.split(\" \", n = 1, expand = True) # extract YYYY-MM-DD date \nnew\n\n\n\n\n\n\n\n\n0\n1\n\n\n\n\n0\n2020-01-01\n00:00:00\n\n\n1\n2020-01-02\n00:00:00\n\n\n2\n2020-01-03\n00:00:00\n\n\n3\n2020-01-04\n00:00:00\n\n\n4\n2020-01-05\n00:00:00\n\n\n...\n...\n...\n\n\n361\n2020-12-27\n00:00:00\n\n\n362\n2020-12-28\n00:00:00\n\n\n363\n2020-12-29\n00:00:00\n\n\n364\n2020-12-30\n00:00:00\n\n\n365\n2020-12-31\n00:00:00\n\n\n\n\n366 rows × 2 columns\n\n\n\n\nts = new[0]\nts\n\n0      2020-01-01\n1      2020-01-02\n2      2020-01-03\n3      2020-01-04\n4      2020-01-05\n          ...    \n361    2020-12-27\n362    2020-12-28\n363    2020-12-29\n364    2020-12-30\n365    2020-12-31\nName: 0, Length: 366, dtype: object"
+  },
+  {
+    "objectID": "Practical1/index.html#slicing-month-from-yyyy-mm-dd-format",
+    "href": "Practical1/index.html#slicing-month-from-yyyy-mm-dd-format",
+    "title": "DSA 554 3.0 Spatio-temporal Data Analysis",
+    "section": "Slicing month from YYYY-MM-DD format",
+    "text": "Slicing month from YYYY-MM-DD format\n\nmonth = ts.apply(lambda x: int(x[5:7])) \nmonth\n\n0       1\n1       1\n2       1\n3       1\n4       1\n       ..\n361    12\n362    12\n363    12\n364    12\n365    12\nName: 0, Length: 366, dtype: int64"
+  },
+  {
+    "objectID": "Practical1/index.html#slicing-day-from-yyyy-mm-dd-format",
+    "href": "Practical1/index.html#slicing-day-from-yyyy-mm-dd-format",
+    "title": "DSA 554 3.0 Spatio-temporal Data Analysis",
+    "section": "Slicing day from YYYY-MM-DD format",
+    "text": "Slicing day from YYYY-MM-DD format\n\nmonth = ts.apply(lambda x: int(x[8:10])) \nmonth\n\n0       1\n1       2\n2       3\n3       4\n4       5\n       ..\n361    27\n362    28\n363    29\n364    30\n365    31\nName: 0, Length: 366, dtype: int64"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n2"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "tt",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n2"
+  }
+]
