@@ -11,7 +11,7 @@
     "href": "Practical1/index.html#economics-data-set",
     "title": "DSA 554 3.0 Spatio-temporal Data Analysis",
     "section": "economics data set",
-    "text": "economics data set\n\neconomics\n\n\n\n\n\n\n\n\ndate\npce\npop\npsavert\nuempmed\nunemploy\nyear\nmonth\n\n\n\n\n0\n1967-07-01\n507.4\n198712\n12.5\n4.5\n2944\n1967\n7\n\n\n1\n1967-08-01\n510.5\n198911\n12.5\n4.7\n2945\n1967\n8\n\n\n2\n1967-09-01\n516.3\n199113\n11.7\n4.6\n2958\n1967\n9\n\n\n3\n1967-10-01\n512.9\n199311\n12.5\n4.9\n3143\n1967\n10\n\n\n4\n1967-11-01\n518.1\n199498\n12.5\n4.7\n3066\n1967\n11\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n569\n2014-12-01\n12122.0\n320201\n5.0\n12.6\n8688\n2014\n12\n\n\n570\n2015-01-01\n12080.8\n320367\n5.5\n13.4\n8979\n2015\n1\n\n\n571\n2015-02-01\n12095.9\n320534\n5.7\n13.1\n8705\n2015\n2\n\n\n572\n2015-03-01\n12161.5\n320707\n5.2\n12.2\n8575\n2015\n3\n\n\n573\n2015-04-01\n12158.9\n320887\n5.6\n11.7\n8549\n2015\n4\n\n\n\n\n574 rows × 8 columns\n\n\n\n\neconomics.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 574 entries, 0 to 573\nData columns (total 8 columns):\n #   Column    Non-Null Count  Dtype         \n---  ------    --------------  -----         \n 0   date      574 non-null    datetime64[ns]\n 1   pce       574 non-null    float64       \n 2   pop       574 non-null    int64         \n 3   psavert   574 non-null    float64       \n 4   uempmed   574 non-null    float64       \n 5   unemploy  574 non-null    int64         \n 6   year      574 non-null    int32         \n 7   month     574 non-null    int32         \ndtypes: datetime64[ns](1), float64(3), int32(2), int64(2)\nmemory usage: 31.5 KB"
+    "text": "economics data set\n\neconomics\n\n\n\n\n\n\n\n\ndate\npce\npop\npsavert\nuempmed\nunemploy\n\n\n\n\n0\n1967-07-01\n507.4\n198712\n12.5\n4.5\n2944\n\n\n1\n1967-08-01\n510.5\n198911\n12.5\n4.7\n2945\n\n\n2\n1967-09-01\n516.3\n199113\n11.7\n4.6\n2958\n\n\n3\n1967-10-01\n512.9\n199311\n12.5\n4.9\n3143\n\n\n4\n1967-11-01\n518.1\n199498\n12.5\n4.7\n3066\n\n\n...\n...\n...\n...\n...\n...\n...\n\n\n569\n2014-12-01\n12122.0\n320201\n5.0\n12.6\n8688\n\n\n570\n2015-01-01\n12080.8\n320367\n5.5\n13.4\n8979\n\n\n571\n2015-02-01\n12095.9\n320534\n5.7\n13.1\n8705\n\n\n572\n2015-03-01\n12161.5\n320707\n5.2\n12.2\n8575\n\n\n573\n2015-04-01\n12158.9\n320887\n5.6\n11.7\n8549\n\n\n\n\n574 rows × 6 columns\n\n\n\n\neconomics.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 574 entries, 0 to 573\nData columns (total 6 columns):\n #   Column    Non-Null Count  Dtype         \n---  ------    --------------  -----         \n 0   date      574 non-null    datetime64[ns]\n 1   pce       574 non-null    float64       \n 2   pop       574 non-null    int64         \n 3   psavert   574 non-null    float64       \n 4   uempmed   574 non-null    float64       \n 5   unemploy  574 non-null    int64         \ndtypes: datetime64[ns](1), float64(3), int64(2)\nmemory usage: 27.0 KB"
   },
   {
     "objectID": "Practical1/index.html#task-1-create-year-and-month-columns",
@@ -53,7 +53,7 @@
     "href": "Practical1/index.html#air-passenger-dataset",
     "title": "DSA 554 3.0 Spatio-temporal Data Analysis",
     "section": "Air Passenger Dataset",
-    "text": "Air Passenger Dataset\n\nairpassenger.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 144 entries, 0 to 143\nData columns (total 2 columns):\n #   Column       Non-Null Count  Dtype \n---  ------       --------------  ----- \n 0   Month        144 non-null    object\n 1   #Passengers  144 non-null    int64 \ndtypes: int64(1), object(1)\nmemory usage: 2.4+ KB\n\n\n\nTime Series Plot for Air Passenger Dataset\n\nggplot(airpassenger, aes(x='Month', y='#Passengers'))+geom_line()"
+    "text": "Air Passenger Dataset\n\nairpassenger.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 144 entries, 0 to 143\nData columns (total 2 columns):\n #   Column       Non-Null Count  Dtype \n---  ------       --------------  ----- \n 0   Month        144 non-null    object\n 1   #Passengers  144 non-null    int64 \ndtypes: int64(1), object(1)\nmemory usage: 2.4+ KB\n\n\n\nTime Series Plot for Air Passenger Dataset\n\nggplot(airpassenger, aes(x='Month', y='#Passengers'))+geom_line()\n\nC:\\Users\\DELL\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\plotnine\\geoms\\geom_path.py:111: PlotnineWarning: geom_path: Each group consist of only one observation. Do you need to adjust the group aesthetic?"
   },
   {
     "objectID": "Practical1/index.html#convert-to-time-column",
@@ -175,17 +175,17 @@
     "text": "Slicing day from YYYY-MM-DD format\n\nmonth = ts.apply(lambda x: int(x[8:10])) \nmonth\n\n0       1\n1       2\n2       3\n3       4\n4       5\n       ..\n361    27\n362    28\n363    29\n364    30\n365    31\nName: 0, Length: 366, dtype: int64"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n1 + 1\n\n2"
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "tt",
+    "title": "Spatio-Temporal Data Analysis: Python",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n2"
+    "text": "P1"
+  },
+  {
+    "objectID": "index.html#practical-1-dec-7-2024",
+    "href": "index.html#practical-1-dec-7-2024",
+    "title": "Spatio-Temporal Data Analysis: Python",
+    "section": "",
+    "text": "P1"
   }
 ]

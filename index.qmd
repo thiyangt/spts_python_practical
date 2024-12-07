@@ -1,12 +1,8 @@
 ---
-title: "tt"
+title: ""
 jupyter: python3
 ---
 
-This is a Quarto website.
+## Practical 1: Dec 7, 2024
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
-
-```{python}
-1 + 1
-```
+[P1](/Practical1/index.html)
