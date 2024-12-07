@@ -6,3 +6,5 @@ jupyter: python3
 ## Practical 1: Dec 7, 2024
 
 [P1](/Practical1/index.html)
+
+[Air Passenger Dataset](/Practical1/AirPassengers.csv)
